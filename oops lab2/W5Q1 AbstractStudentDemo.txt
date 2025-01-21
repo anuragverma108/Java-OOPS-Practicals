@@ -1,0 +1,45 @@
+//The file name for this code should be Main1.java
+
+abstract class Student {
+    protected String name;
+
+    public Student(String name) {
+        this.name = name;
+    }
+    public abstract void giveExam();
+}
+
+
+class CseStudent extends Student {
+    public CseStudent(String name) {
+        super(name);
+    }
+
+    @Override
+    public void giveExam() {
+        System.out.println(name + " is giving the CSE exam.");
+    }
+}
+
+class ItStudent extends Student {
+    public ItStudent(String name) {
+        super(name);
+    }
+
+    @Override
+    public void giveExam() {
+        System.out.println(name + " is giving the IT exam.");
+    }
+}
+
+public class Main1 {
+    public static void main(String[] args) {
+        
+        Student student;
+        student = new CseStudent("John");
+        student.giveExam();
+
+        student = new ItStudent("Alice");
+        student.giveExam();  
+    }
+}

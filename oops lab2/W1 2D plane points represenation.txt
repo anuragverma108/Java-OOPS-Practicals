@@ -1,0 +1,63 @@
+Create a class to represent points in 2D plane with proper constructors. Create objects of this class within the main():
+a) in the same class
+
+public class Point2D {
+    private double x;
+    private double y;
+
+    // Constructor
+    public Point2D(double x, double y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    // Method to display point details
+    public void displayPoint() {
+        System.out.println("Point: (" + x + ", " + y + ")");
+    }
+
+    public static void main(String[] args) {
+        // Objects created and used within the same class
+        Point2D point1 = new Point2D(1.0, 2.0);
+        Point2D point2 = new Point2D(3.5, 4.5);
+
+        // Display points
+        System.out.println("Objects created in the same class:");
+        point1.displayPoint();
+        point2.displayPoint();
+    }
+}
+
+
+
+b) in a different class
+
+public class Point2D {
+    private double x;
+    private double y;
+
+    // Constructor
+    public Point2D(double x, double y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    // Method to display point details
+    public void displayPoint() {
+        System.out.println("Point: (" + x + ", " + y + ")");
+    }
+}
+
+
+public class MainInDifferentClass {
+    public static void main(String[] args) {
+        // Objects created in a different class
+        Point2D point1 = new Point2D(5.0, 6.0);
+        Point2D point2 = new Point2D(7.5, 8.5);
+
+        // Display points
+        System.out.println("Objects created in a different class:");
+        point1.displayPoint();
+        point2.displayPoint();
+    }
+}
