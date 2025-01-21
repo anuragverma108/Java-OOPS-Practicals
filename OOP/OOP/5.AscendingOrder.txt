@@ -1,0 +1,57 @@
+// File Name: AscendingOrder.java
+
+public class AscendingOrder {
+    public static void main(String[] args) {
+        if (args.length == 0) {
+            System.out.println("Please provide a set of integers as command-line arguments.");
+            return;
+        }
+
+        try {
+            int[] numbers = new int[args.length];
+            for (int i = 0; i < args.length; i++) {
+                numbers[i] = Integer.parseInt(args[i]);
+            }
+
+            // Sort the array using bubble sort
+            for (int i = 0; i < numbers.length - 1; i++) {
+                for (int j = 0; j < numbers.length - i - 1; j++) {
+                    if (numbers[j] > numbers[j + 1]) {
+                        // Swap numbers[j] and numbers[j+1]
+                        int temp = numbers[j];
+                        numbers[j] = numbers[j + 1];
+                        numbers[j + 1] = temp;
+                    }
+                }
+            }
+
+            System.out.println("Numbers in ascending order:");
+            for (int num : numbers) {
+                System.out.print(num + " ");
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input. Please ensure all inputs are integers.");
+        }
+    }
+}
+
+/*
+Steps to Run:
+1. Save the file as AscendingOrder.java.
+2. Compile the file:
+   javac AscendingOrder.java
+3. Run the program with a set of integers as command-line arguments:
+   java AscendingOrder 5 3 8 1 2
+
+Sample Output:
+- Input: java AscendingOrder 5 3 8 1 2
+  Output: Numbers in ascending order:
+          1 2 3 5 8
+
+- Input: java AscendingOrder 10 5 0 -3 7
+  Output: Numbers in ascending order:
+          -3 0 5 7 10
+
+- Input: java AscendingOrder abc 5 3
+  Output: Invalid input. Please ensure all inputs are integers.
+*/

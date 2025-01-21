@@ -1,0 +1,61 @@
+// File Name: BinaryPattern.java
+
+public class BinaryPattern {
+    public static void main(String[] args) {
+        if (args.length == 0) {
+            System.out.println("Please provide the value of n as a command-line argument.");
+            return;
+        }
+
+        try {
+            int n = Integer.parseInt(args[0]);
+            if (n <= 0) {
+                System.out.println("Please enter a positive integer for n.");
+                return;
+            }
+
+            // Generate and print the pattern
+            System.out.println("Generated Pattern:");
+            for (int i = 1; i <= n; i++) {
+                for (int j = 1; j <= i; j++) {
+                    System.out.print((j % 2) == 1 ? "1" : "0");
+                }
+                System.out.println();
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input. Please enter a valid integer for n.");
+        }
+    }
+}
+
+/*
+Steps to Run:
+1. Save the file as BinaryPattern.java.
+2. Compile the file:
+   javac BinaryPattern.java
+3. Run the program with a positive integer n as a command-line argument:
+   java BinaryPattern 5
+
+Sample Output:
+- Input: java BinaryPattern 5
+  Output:
+          1
+          10
+          101
+          1010
+          10101
+
+- Input: java BinaryPattern 3
+  Output:
+          1
+          10
+          101
+
+- Input: java BinaryPattern 0
+  Output:
+          Please enter a positive integer for n.
+
+- Input: java BinaryPattern abc
+  Output:
+          Invalid input. Please enter a valid integer for n.
+*/

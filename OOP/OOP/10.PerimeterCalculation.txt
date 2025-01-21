@@ -1,0 +1,125 @@
+// File Name: PerimeterCalculation.java
+
+public class PerimeterCalculation {
+
+    // Circle class to compute perimeter
+    static class Circle {
+        double radius;
+
+        // Parameterized constructor to initialize radius
+        Circle(double radius) {
+            this.radius = radius;
+        }
+
+        // Method to calculate perimeter (circumference)
+        public double calculatePerimeter() {
+            return 2 * Math.PI * radius;
+        }
+    }
+
+    // Rectangle class to compute perimeter
+    static class Rectangle {
+        double length, width;
+
+        // Parameterized constructor to initialize length and width
+        Rectangle(double length, double width) {
+            this.length = length;
+            this.width = width;
+        }
+
+        // Method to calculate perimeter
+        public double calculatePerimeter() {
+            return 2 * (length + width);
+        }
+    }
+
+    // Square class to compute perimeter
+    static class Square {
+        double side;
+
+        // Parameterized constructor to initialize side
+        Square(double side) {
+            this.side = side;
+        }
+
+        // Method to calculate perimeter
+        public double calculatePerimeter() {
+            return 4 * side;
+        }
+    }
+
+    // Main method to demonstrate the program using command-line arguments
+    public static void main(String[] args) {
+        if (args.length < 3) {
+            System.out.println("Please provide all shape arguments in the correct order: circle radius rectangle length width square side");
+            return;
+        }
+
+        try {
+            // Parsing the arguments
+            int i = 0;
+            
+            // For Circle
+            if (args[i].equalsIgnoreCase("circle") && i + 1 < args.length) {
+                double radius = Double.parseDouble(args[i + 1]);
+                Circle circle = new Circle(radius);
+                System.out.println("Circle Perimeter: " + circle.calculatePerimeter());
+                i += 2; // Move to the next shape
+            }
+
+            // For Rectangle
+            if (args[i].equalsIgnoreCase("rectangle") && i + 2 < args.length) {
+                double length = Double.parseDouble(args[i + 1]);
+                double width = Double.parseDouble(args[i + 2]);
+                Rectangle rectangle = new Rectangle(length, width);
+                System.out.println("Rectangle Perimeter: " + rectangle.calculatePerimeter());
+                i += 3; // Move to the next shape
+            }
+
+            // For Square
+            if (args[i].equalsIgnoreCase("square") && i + 1 < args.length) {
+                double side = Double.parseDouble(args[i + 1]);
+                Square square = new Square(side);
+                System.out.println("Square Perimeter: " + square.calculatePerimeter());
+                i += 2; // Move to the next shape
+            }
+
+            // If there are any remaining arguments that do not match a valid shape
+            if (i != args.length) {
+                System.out.println("Invalid or missing shape argument(s). Please use the correct format.");
+            }
+
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid number format. Please provide valid dimensions.");
+        }
+    }
+}
+
+/*
+Steps to Run:
+1. Save the file as PerimeterCalculation.java.
+2. Compile the file:
+   javac PerimeterCalculation.java
+3. Run the program with all shapes and dimensions in one command-line argument:
+   java PerimeterCalculation circle 5 rectangle 4 6 square 4
+
+Sample Output:
+- Input: java PerimeterCalculation circle 5 rectangle 4 6 square 4
+  Output:
+    Circle Perimeter: 31.41592653589793
+    Rectangle Perimeter: 20.0
+    Square Perimeter: 16.0
+
+- Input: java PerimeterCalculation circle 5 rectangle 4 6
+  Output:
+    Circle Perimeter: 31.41592653589793
+    Rectangle Perimeter: 20.0
+
+- Input: java PerimeterCalculation square 4
+  Output:
+    Square Perimeter: 16.0
+
+- Input: java PerimeterCalculation triangle 5
+  Output:
+    Invalid or missing shape argument(s). Please use the correct format.
+*/

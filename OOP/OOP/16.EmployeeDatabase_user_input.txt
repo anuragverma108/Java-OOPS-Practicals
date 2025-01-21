@@ -1,0 +1,156 @@
+// File Name: EmployeeDatabase.java
+
+import java.util.Scanner;
+
+// Superclass: Employee
+class Employee {
+    protected int empCode;
+    protected String empName;
+    protected String address;
+    protected String phoneNo;
+    protected double da = 0.10; // 10% DA
+    protected double hra = 0.20; // 20% HRA
+    protected double basicPay;
+
+    // Constructor to initialize employee details
+    public Employee(int empCode, String empName, String address, String phoneNo, double basicPay) {
+        this.empCode = empCode;
+        this.empName = empName;
+        this.address = address;
+        this.phoneNo = phoneNo;
+        this.basicPay = basicPay;
+    }
+
+    // Method to calculate salary
+    public double calculateSalary() {
+        return basicPay + (basicPay * da) + (basicPay * hra);
+    }
+
+    // Method to display employee details
+    public void displayDetails() {
+        System.out.println("Employee Code: " + empCode);
+        System.out.println("Employee Name: " + empName);
+        System.out.println("Address: " + address);
+        System.out.println("Phone Number: " + phoneNo);
+        System.out.println("Basic Pay: " + basicPay);
+        System.out.println("DA (10%): " + (basicPay * da));
+        System.out.println("HRA (20%): " + (basicPay * hra));
+        System.out.println("Total Salary: " + calculateSalary());
+    }
+}
+
+// Subclass: Teaching (inherited from Employee)
+class Teaching extends Employee {
+    protected String subjectSpecialization;
+    protected String designation;
+
+    // Constructor to initialize teaching class details
+    public Teaching(int empCode, String empName, String address, String phoneNo, double basicPay,
+                    String subjectSpecialization, String designation) {
+        super(empCode, empName, address, phoneNo, basicPay);
+        this.subjectSpecialization = subjectSpecialization;
+        this.designation = designation;
+    }
+
+    // Method to display teaching-specific details
+    public void displayTeachingDetails() {
+        displayDetails();
+        System.out.println("Subject Specialization: " + subjectSpecialization);
+        System.out.println("Designation: " + designation);
+    }
+}
+
+// Subclass: Faculty (inherited from Teaching)
+class Faculty extends Teaching {
+    private String researchArea;
+
+    // Constructor to initialize faculty-specific details
+    public Faculty(int empCode, String empName, String address, String phoneNo, double basicPay,
+                   String subjectSpecialization, String designation, String researchArea) {
+        super(empCode, empName, address, phoneNo, basicPay, subjectSpecialization, designation);
+        this.researchArea = researchArea;
+    }
+
+    // Method to display faculty-specific details
+    public void displayFacultyDetails() {
+        displayTeachingDetails();
+        System.out.println("Research Area: " + researchArea);
+    }
+}
+
+// Subclass: Administrative (inherited from Office)
+class Administrative extends Employee {
+    protected String position;
+
+    public Administrative(int empCode, String empName, String address, String phoneNo, double basicPay, String position) {
+        super(empCode, empName, address, phoneNo, basicPay);
+        this.position = position;
+    }
+
+    // Method to display administrative-specific details
+    public void displayAdminDetails() {
+        displayDetails();
+        System.out.println("Position: " + position);
+    }
+}
+
+// Main class to test the program
+public class EmployeeDatabase {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // Input for Faculty
+        System.out.println("Enter details for Faculty:");
+        System.out.print("Employee Code: ");
+        int facultyCode = sc.nextInt();
+        sc.nextLine(); // Consume newline
+        System.out.print("Employee Name: ");
+        String facultyName = sc.nextLine();
+        System.out.print("Address: ");
+        String facultyAddress = sc.nextLine();
+        System.out.print("Phone Number: ");
+        String facultyPhone = sc.nextLine();
+        System.out.print("Basic Pay: ");
+        double facultyPay = sc.nextDouble();
+        sc.nextLine(); // Consume newline
+        System.out.print("Subject Specialization: ");
+        String facultySubject = sc.nextLine();
+        System.out.print("Designation: ");
+        String facultyDesignation = sc.nextLine();
+        System.out.print("Research Area: ");
+        String facultyResearch = sc.nextLine();
+
+        Faculty faculty = new Faculty(facultyCode, facultyName, facultyAddress, facultyPhone,
+                facultyPay, facultySubject, facultyDesignation, facultyResearch);
+
+        // Input for Administrative
+        System.out.println("\nEnter details for Administrative Staff:");
+        System.out.print("Employee Code: ");
+        int adminCode = sc.nextInt();
+        sc.nextLine(); // Consume newline
+        System.out.print("Employee Name: ");
+        String adminName = sc.nextLine();
+        System.out.print("Address: ");
+        String adminAddress = sc.nextLine();
+        System.out.print("Phone Number: ");
+        String adminPhone = sc.nextLine();
+        System.out.print("Basic Pay: ");
+        double adminPay = sc.nextDouble();
+        sc.nextLine(); // Consume newline
+        System.out.print("Position: ");
+        String adminPosition = sc.nextLine();
+
+        Administrative admin = new Administrative(adminCode, adminName, adminAddress, adminPhone,
+                adminPay, adminPosition);
+
+        // Display details for Faculty
+        System.out.println("\nFaculty Details:");
+        faculty.displayFacultyDetails();
+
+        // Display details for Administrative Staff
+        System.out.println("\nAdministrative Details:");
+        admin.displayAdminDetails();
+
+        sc.close();
+    }
+}

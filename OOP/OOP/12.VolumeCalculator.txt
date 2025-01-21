@@ -1,0 +1,86 @@
+// File Name: VolumeCalculator.java
+
+import java.io.*;
+
+public class VolumeCalculator {
+
+    // Volume class with overloaded methods for different shapes
+    static class Volume {
+
+        // Method to calculate the volume of a Cube
+        public double calculateVolume(double side) {
+            return Math.pow(side, 3);
+        }
+
+        // Method to calculate the volume of a Cylinder
+        public double calculateVolume(double radius, double height) {
+            return Math.PI * Math.pow(radius, 2) * height;
+        }
+
+        // Method to calculate the volume of an Ellipsoid
+        public double calculateVolume(double a, double b, double c) {
+            return (4.0 / 3.0) * Math.PI * a * b * c;
+        }
+    }
+
+    // Main method to demonstrate the Volume class using BufferedReader
+    public static void main(String[] args) {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+        try {
+            // Create Volume object
+            Volume volume = new Volume();
+
+            // Input for Cube
+            System.out.print("Enter the side of the cube: ");
+            double side = Double.parseDouble(reader.readLine());
+            System.out.println("Volume of Cube: " + volume.calculateVolume(side));
+
+            // Input for Cylinder
+            System.out.print("Enter the radius of the cylinder: ");
+            double radius = Double.parseDouble(reader.readLine());
+            System.out.print("Enter the height of the cylinder: ");
+            double height = Double.parseDouble(reader.readLine());
+            System.out.println("Volume of Cylinder: " + volume.calculateVolume(radius, height));
+
+            // Input for Ellipsoid
+            System.out.print("Enter the semi-major axis (a) of the ellipsoid: ");
+            double a = Double.parseDouble(reader.readLine());
+            System.out.print("Enter the semi-minor axis (b) of the ellipsoid: ");
+            double b = Double.parseDouble(reader.readLine());
+            System.out.print("Enter the third axis (c) of the ellipsoid: ");
+            double c = Double.parseDouble(reader.readLine());
+            System.out.println("Volume of Ellipsoid: " + volume.calculateVolume(a, b, c));
+
+        } catch (IOException e) {
+            System.out.println("Error in input: " + e.getMessage());
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid number format. Please enter valid dimensions.");
+        }
+    }
+}
+
+/*
+Steps to Run:
+1. Save the file as VolumeCalculator.java.
+2. Compile the file:
+   javac VolumeCalculator.java
+3. Run the program:
+   java VolumeCalculator
+
+Sample Output:
+Enter the side of the cube: 3
+Volume of Cube: 27.0
+
+Enter the radius of the cylinder: 4
+Enter the height of the cylinder: 5
+Volume of Cylinder: 251.32741228718345
+
+Enter the semi-major axis (a) of the ellipsoid: 3
+Enter the semi-minor axis (b) of the ellipsoid: 4
+Enter the third axis (c) of the ellipsoid: 5
+Volume of Ellipsoid: 251.32741228718345
+
+Error Case:
+If invalid input is entered, the program will show an error message.
+*/

@@ -1,0 +1,105 @@
+// File Name: DesignPattern.java
+
+public class DesignPattern {
+
+    // Method to draw a triangle
+    public static void drawTriangle(int n) {
+        System.out.println("Triangle Pattern:");
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= i; j++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+    }
+
+    // Method to draw a rectangle
+    public static void drawRectangle(int rows, int cols) {
+        System.out.println("Rectangle Pattern:");
+        for (int i = 1; i <= rows; i++) {
+            for (int j = 1; j <= cols; j++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+    }
+
+    // Method to draw a square
+    public static void drawSquare(int side) {
+        System.out.println("Square Pattern:");
+        for (int i = 1; i <= side; i++) {
+            for (int j = 1; j <= side; j++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+    }
+
+    // Main method to demonstrate the class methods using command line arguments
+    public static void main(String[] args) {
+        if (args.length < 2) {
+            System.out.println("Please provide the shape and dimensions as command-line arguments.");
+            return;
+        }
+
+        String shape = args[0];  // First argument: shape type (e.g., "triangle", "rectangle", "square")
+        try {
+            if (shape.equalsIgnoreCase("triangle") && args.length == 2) {
+                int n = Integer.parseInt(args[1]);  // Height of the triangle
+                drawTriangle(n);
+            } else if (shape.equalsIgnoreCase("rectangle") && args.length == 3) {
+                int rows = Integer.parseInt(args[1]);
+                int cols = Integer.parseInt(args[2]);
+                drawRectangle(rows, cols);
+            } else if (shape.equalsIgnoreCase("square") && args.length == 2) {
+                int side = Integer.parseInt(args[1]);
+                drawSquare(side);
+            } else {
+                System.out.println("Invalid input or incorrect number of arguments.");
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid number format. Please provide valid integers for dimensions.");
+        }
+    }
+}
+
+/*
+Steps to Run:
+1. Save the file as DesignPattern.java.
+2. Compile the file:
+   javac DesignPattern.java
+3. Run the program with the shape type and dimensions as command-line arguments:
+   java DesignPattern triangle 5
+   java DesignPattern rectangle 4 6
+   java DesignPattern square 4
+
+Sample Output:
+- Input: java DesignPattern triangle 5
+  Output:
+    Triangle Pattern:
+    *
+    **
+    ***
+    ****
+    *****
+
+- Input: java DesignPattern rectangle 4 6
+  Output:
+    Rectangle Pattern:
+    ******
+    ******
+    ******
+    ******
+    
+- Input: java DesignPattern square 4
+  Output:
+    Square Pattern:
+    ****
+    ****
+    ****
+    ****
+
+- Input: java DesignPattern circle 5
+  Output:
+    Invalid input or incorrect number of arguments.
+*/

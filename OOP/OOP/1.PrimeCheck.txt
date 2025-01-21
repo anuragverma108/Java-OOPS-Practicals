@@ -1,0 +1,53 @@
+// File Name: PrimeCheck.java
+
+public class PrimeCheck {
+    public static void main(String[] args) {
+        if (args.length == 0) {
+            System.out.println("Please provide a number as a command-line argument.");
+            return;
+        }
+
+        try {
+            int number = Integer.parseInt(args[0]);
+            if (number <= 1) {
+                System.out.println(number + " is not a prime number.");
+                return;
+            }
+
+            boolean isPrime = true;
+            for (int i = 2; i <= Math.sqrt(number); i++) {
+                if (number % i == 0) {
+                    isPrime = false;
+                    break;
+                }
+            }
+
+            if (isPrime) {
+                System.out.println(number + " is a prime number.");
+            } else {
+                System.out.println(number + " is not a prime number.");
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input. Please enter a valid integer.");
+        }
+    }
+}
+
+/*
+Steps to Run:
+1. Save the file as PrimeCheck.java.
+2. Compile the file:
+   javac PrimeCheck.java
+3. Run the program with a number as a command-line argument:
+   java PrimeCheck 17
+
+Sample Output:
+- Input: java PrimeCheck 17
+  Output: 17 is a prime number.
+
+- Input: java PrimeCheck 10
+  Output: 10 is not a prime number.
+
+- Input: java PrimeCheck abc
+  Output: Invalid input. Please enter a valid integer.
+*/

@@ -1,0 +1,226 @@
+// File Name: EmployeeDatabase.java
+
+// Superclass: Employee
+class Employee {
+    protected int empCode;
+    protected String empName;
+    protected String address;
+    protected String phoneNo;
+    protected double da = 0.10; // 10% DA
+    protected double hra = 0.20; // 20% HRA
+    protected double basicPay;
+
+    // Constructor to initialize employee details
+    public Employee(int empCode, String empName, String address, String phoneNo, double basicPay) {
+        this.empCode = empCode;
+        this.empName = empName;
+        this.address = address;
+        this.phoneNo = phoneNo;
+        this.basicPay = basicPay;
+    }
+
+    // Method to calculate salary
+    public double calculateSalary() {
+        return basicPay + (basicPay * da) + (basicPay * hra);
+    }
+
+    // Method to display employee details
+    public void displayDetails() {
+        System.out.println("Employee Code: " + empCode);
+        System.out.println("Employee Name: " + empName);
+        System.out.println("Address: " + address);
+        System.out.println("Phone Number: " + phoneNo);
+        System.out.println("Basic Pay: " + basicPay);
+        System.out.println("DA (10%): " + (basicPay * da));
+        System.out.println("HRA (20%): " + (basicPay * hra));
+        System.out.println("Total Salary: " + calculateSalary());
+    }
+}
+
+// Subclass: Teaching (inherited from Employee)
+class Teaching extends Employee {
+    protected String subjectSpecialization;
+    protected String designation;
+
+    // Constructor to initialize teaching class details
+    public Teaching(int empCode, String empName, String address, String phoneNo, double basicPay,
+                    String subjectSpecialization, String designation) {
+        super(empCode, empName, address, phoneNo, basicPay);
+        this.subjectSpecialization = subjectSpecialization;
+        this.designation = designation;
+    }
+
+    // Method to display teaching-specific details
+    public void displayTeachingDetails() {
+        displayDetails();
+        System.out.println("Subject Specialization: " + subjectSpecialization);
+        System.out.println("Designation: " + designation);
+    }
+}
+
+// Subclass: Office (inherited from Employee)
+class Office extends Employee {
+    protected String position;
+
+    // Constructor to initialize office class details
+    public Office(int empCode, String empName, String address, String phoneNo, double basicPay, String position) {
+        super(empCode, empName, address, phoneNo, basicPay);
+        this.position = position;
+    }
+
+    // Method to display office-specific details
+    public void displayOfficeDetails() {
+        displayDetails();
+        System.out.println("Position: " + position);
+    }
+}
+
+// Subclass: Faculty (inherited from Teaching)
+class Faculty extends Teaching {
+    private String researchArea;
+
+    // Constructor to initialize faculty-specific details
+    public Faculty(int empCode, String empName, String address, String phoneNo, double basicPay,
+                   String subjectSpecialization, String designation, String researchArea) {
+        super(empCode, empName, address, phoneNo, basicPay, subjectSpecialization, designation);
+        this.researchArea = researchArea;
+    }
+
+    // Method to display faculty-specific details
+    public void displayFacultyDetails() {
+        displayTeachingDetails();
+        System.out.println("Research Area: " + researchArea);
+    }
+}
+
+// Subclass: Technical (inherited from Teaching)
+class Technical extends Teaching {
+    private String techExpertArea;
+
+    // Constructor to initialize technical-specific details
+    public Technical(int empCode, String empName, String address, String phoneNo, double basicPay,
+                     String subjectSpecialization, String designation, String techExpertArea) {
+        super(empCode, empName, address, phoneNo, basicPay, subjectSpecialization, designation);
+        this.techExpertArea = techExpertArea;
+    }
+
+    // Method to display technical-specific details
+    public void displayTechnicalDetails() {
+        displayTeachingDetails();
+        System.out.println("Technical Expert Area: " + techExpertArea);
+    }
+}
+
+// Subclass: Administrative (inherited from Office)
+class Administrative extends Office {
+    public Administrative(int empCode, String empName, String address, String phoneNo, double basicPay, String position) {
+        super(empCode, empName, address, phoneNo, basicPay, position);
+    }
+
+    // Method to display administrative-specific details
+    public void displayAdminDetails() {
+        displayOfficeDetails();
+    }
+}
+
+// Subclass: Accounts (inherited from Office)
+class Accounts extends Office {
+    public Accounts(int empCode, String empName, String address, String phoneNo, double basicPay, String position) {
+        super(empCode, empName, address, phoneNo, basicPay, position);
+    }
+
+    // Method to display accounts-specific details
+    public void displayAccountDetails() {
+        displayOfficeDetails();
+    }
+}
+
+// Main class to test the program
+public class EmployeeDatabase {
+    public static void main(String[] args) {
+        // Creating employee objects for different roles
+
+        // Faculty
+        Faculty faculty = new Faculty(101, "Dr. John Doe", "123 Elm Street", "9876543210", 50000, "Computer Science", "Professor", "Artificial Intelligence");
+        // Technical
+        Technical technical = new Technical(102, "Jane Smith", "456 Oak Avenue", "9123456789", 45000, "Electrical Engineering", "Assistant Professor", "Robotics");
+
+        // Administrative
+        Administrative admin = new Administrative(201, "Mark Brown", "789 Pine Road", "9988776655", 30000, "Office Manager");
+        // Accounts
+        Accounts accounts = new Accounts(202, "Emily White", "321 Maple Boulevard", "9556677889", 35000, "Accountant");
+
+        // Display details and calculate salaries for each employee
+
+        System.out.println("\nFaculty Details:");
+        faculty.displayFacultyDetails();
+
+        System.out.println("\nTechnical Details:");
+        technical.displayTechnicalDetails();
+
+        System.out.println("\nAdministrative Details:");
+        admin.displayAdminDetails();
+
+        System.out.println("\nAccounts Details:");
+        accounts.displayAccountDetails();
+    }
+}
+
+/*
+Steps to Run:
+1. Save the file as EmployeeDatabase.java.
+2. Compile the file:
+   javac EmployeeDatabase.java
+3. Run the program:
+   java EmployeeDatabase
+
+Sample Output:
+
+Faculty Details:
+Employee Code: 101
+Employee Name: Dr. John Doe
+Address: 123 Elm Street
+Phone Number: 9876543210
+Basic Pay: 50000.0
+DA (10%): 5000.0
+HRA (20%): 10000.0
+Total Salary: 65000.0
+Subject Specialization: Computer Science
+Designation: Professor
+Research Area: Artificial Intelligence
+
+Technical Details:
+Employee Code: 102
+Employee Name: Jane Smith
+Address: 456 Oak Avenue
+Phone Number: 9123456789
+Basic Pay: 45000.0
+DA (10%): 4500.0
+HRA (20%): 9000.0
+Total Salary: 58500.0
+Subject Specialization: Electrical Engineering
+Designation: Assistant Professor
+Technical Expert Area: Robotics
+
+Administrative Details:
+Employee Code: 201
+Employee Name: Mark Brown
+Address: 789 Pine Road
+Phone Number: 9988776655
+Basic Pay: 30000.0
+DA (10%): 3000.0
+HRA (20%): 6000.0
+Total Salary: 39000.0
+Position: Office Manager
+
+Accounts Details:
+Employee Code: 202
+Employee Name: Emily White
+Address: 321 Maple Boulevard
+Phone Number: 9556677889
+Basic Pay: 35000.0
+DA (10%): 3500.0
+HRA (20%): 7000.0
+Total Salary: 45500.0
+Position: Accountant
+*/

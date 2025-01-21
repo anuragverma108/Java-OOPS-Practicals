@@ -1,0 +1,63 @@
+// File Name: PrimeRange.java
+
+public class PrimeRange {
+    public static void main(String[] args) {
+        if (args.length < 2) {
+            System.out.println("Please provide the range as two command-line arguments.");
+            return;
+        }
+
+        try {
+            int start = Integer.parseInt(args[0]);
+            int end = Integer.parseInt(args[1]);
+
+            if (start > end) {
+                System.out.println("Invalid range. Start should be less than or equal to end.");
+                return;
+            }
+
+            System.out.println("Prime numbers between " + start + " and " + end + ":");
+            for (int number = start; number <= end; number++) {
+                if (isPrime(number)) {
+                    System.out.print(number + " ");
+                }
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input. Please enter valid integers for the range.");
+        }
+    }
+
+    // Helper method to check if a number is prime
+    public static boolean isPrime(int num) {
+        if (num <= 1) {
+            return false;
+        }
+        for (int i = 2; i <= Math.sqrt(num); i++) {
+            if (num % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+/*
+Steps to Run:
+1. Save the file as PrimeRange.java.
+2. Compile the file:
+   javac PrimeRange.java
+3. Run the program with two numbers as command-line arguments:
+   java PrimeRange 10 30
+
+Sample Output:
+- Input: java PrimeRange 10 30
+  Output: Prime numbers between 10 and 30:
+          11 13 17 19 23 29 
+
+- Input: java PrimeRange 1 10
+  Output: Prime numbers between 1 and 10:
+          2 3 5 7 
+
+- Input: java PrimeRange abc 10
+  Output: Invalid input. Please enter valid integers for the range.
+*/

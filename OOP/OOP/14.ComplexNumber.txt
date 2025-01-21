@@ -1,0 +1,108 @@
+// File Name: ComplexNumber.java
+
+class Complex {
+    // Data members
+    private double real;
+    private double imaginary;
+
+    // Default constructor (initializes complex number to 0 + 0i)
+    public Complex() {
+        this.real = 0;
+        this.imaginary = 0;
+    }
+
+    // Parameterized constructor (normal initialization)
+    public Complex(double real, double imaginary) {
+        this.real = real;
+        this.imaginary = imaginary;
+    }
+
+    // Copy constructor (initializes using another Complex object)
+    public Complex(Complex c) {
+        this.real = c.real;
+        this.imaginary = c.imaginary;
+    }
+
+    // Method for addition of two complex numbers
+    public Complex add(Complex c) {
+        return new Complex(this.real + c.real, this.imaginary + c.imaginary);
+    }
+
+    // Method for subtraction of two complex numbers
+    public Complex subtract(Complex c) {
+        return new Complex(this.real - c.real, this.imaginary - c.imaginary);
+    }
+
+    // Method for multiplication of two complex numbers
+    public Complex multiply(Complex c) {
+        double realPart = this.real * c.real - this.imaginary * c.imaginary;
+        double imaginaryPart = this.real * c.imaginary + this.imaginary * c.real;
+        return new Complex(realPart, imaginaryPart);
+    }
+
+    // Method to display the complex number in a+bi form
+    public void display() {
+        if (this.imaginary >= 0) {
+            System.out.println(this.real + " + " + this.imaginary + "i");
+        } else {
+            System.out.println(this.real + " - " + (-this.imaginary) + "i");
+        }
+    }
+
+    // Main method to test the Complex class
+    public static void main(String[] args) {
+        // Using default constructor
+        Complex c1 = new Complex();
+        // Using parameterized constructor
+        Complex c2 = new Complex(3, 2);
+        // Using copy constructor
+        Complex c3 = new Complex(c2);
+
+        // Displaying the complex numbers
+        System.out.println("Complex number c1 (default constructor): ");
+        c1.display();
+        System.out.println("Complex number c2 (parameterized constructor): ");
+        c2.display();
+        System.out.println("Complex number c3 (copy constructor): ");
+        c3.display();
+
+        // Performing addition
+        Complex resultAdd = c2.add(c3);
+        System.out.println("Addition of c2 and c3: ");
+        resultAdd.display();
+
+        // Performing subtraction
+        Complex resultSub = c2.subtract(c3);
+        System.out.println("Subtraction of c2 and c3: ");
+        resultSub.display();
+
+        // Performing multiplication
+        Complex resultMul = c2.multiply(c3);
+        System.out.println("Multiplication of c2 and c3: ");
+        resultMul.display();
+    }
+}
+
+/*
+Steps to Run:
+1. Save the file as ComplexNumber.java.
+2. Compile the file:
+   javac ComplexNumber.java
+3. Run the program:
+   java ComplexNumber
+
+Sample Output:
+
+Complex number c1 (default constructor): 
+0.0 + 0.0i
+Complex number c2 (parameterized constructor): 
+3.0 + 2.0i
+Complex number c3 (copy constructor): 
+3.0 + 2.0i
+Addition of c2 and c3: 
+6.0 + 4.0i
+Subtraction of c2 and c3: 
+0.0 + 0.0i
+Multiplication of c2 and c3: 
+5.0 + 12.0i
+*/

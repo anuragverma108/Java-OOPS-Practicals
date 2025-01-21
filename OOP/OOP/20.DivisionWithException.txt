@@ -1,0 +1,68 @@
+/*
+ * Filename: DivisionWithException.java
+ * 
+ * Steps to run this program:
+ * 1. Save this code in a file named "DivisionWithException.java"
+ * 2. Open terminal/command prompt
+ * 3. Navigate to the directory containing the file
+ * 4. Compile: javac DivisionWithException.java
+ * 5. Run: java DivisionWithException
+ *
+ * Sample Output 1 (Normal Division):
+ * Enter the numerator: 10
+ * Enter the denominator: 2
+ * Trying to divide 10 by 2
+ * Result of division: 5
+ *
+ * Sample Output 2 (Division by Zero):
+ * Enter the numerator: 10
+ * Enter the denominator: 0
+ * Trying to divide 10 by 0
+ * Error: / by zero
+ * Exception occurred
+ *
+ * Sample Output 3 (Invalid Input):
+ * Enter the numerator: abc
+ * Invalid input. Please enter valid integers.
+ * Exception occurred
+ */
+
+import java.util.Scanner;
+
+public class DivisionWithException {
+    public static void main(String[] args) {
+        // Initialize scanner for user input
+        Scanner scanner = new Scanner(System.in);
+        int quotient = -1;  // Default value as specified
+        
+        try {
+            // Get user input for numerator
+            System.out.print("Enter the numerator: ");
+            int numerator = scanner.nextInt();
+            
+            // Get user input for denominator
+            System.out.print("Enter the denominator: ");
+            int denominator = scanner.nextInt();
+            
+            System.out.println("Trying to divide " + numerator + " by " + denominator);
+            quotient = numerator / denominator;
+        }
+        catch (ArithmeticException e) {
+            System.out.println("Error: " + e.getMessage());
+            // quotient remains -1 as initialized
+        }
+        catch (Exception e) {
+            System.out.println("Invalid input. Please enter valid integers.");
+            // quotient remains -1 as initialized
+        }
+        finally {
+            if (quotient == -1) {
+                System.out.println("Exception occurred");
+            } else {
+                System.out.println("Result of division: " + quotient);
+            }
+            // Close the scanner
+            scanner.close();
+        }
+    }
+}

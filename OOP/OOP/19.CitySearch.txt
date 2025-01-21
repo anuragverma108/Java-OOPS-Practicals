@@ -1,0 +1,62 @@
+// File Name: CitySearch.java
+
+import java.util.Scanner;
+
+// Custom Exception Class
+class NoMatchFoundException extends Exception {
+    public NoMatchFoundException(String message) {
+        super(message);
+    }
+}
+
+// Main Class
+public class CitySearch {
+    public static void main(String[] args) {
+        // Array of city names
+        String[] cities = {"Chennai", "Mumbai", "Delhi", "Bangalore"};
+
+        // Scanner to accept user input
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter the city name to search: ");
+        String cityToSearch = sc.nextLine();
+
+        try {
+            // Check if the city is "Kolkata"
+            searchCity(cityToSearch, cities);
+            System.out.println(cityToSearch + " found in the list.");
+        } catch (NoMatchFoundException e) {
+            System.out.println("Exception: " + e.getMessage());
+        }
+    }
+
+    // Method to search for a city
+    public static void searchCity(String city, String[] cityList) throws NoMatchFoundException {
+        for (String c : cityList) {
+            if (c.equalsIgnoreCase(city)) {
+                return; // City found, return without throwing exception
+            }
+        }
+        // If "Kolkata" is not found, throw custom exception
+        throw new NoMatchFoundException("NoMatchFoundException: " + city + " is not in the list.");
+    }
+}
+
+/*
+Steps to Run the Program:
+1. Save the file as "CitySearch.java".
+2. Compile the file using the following command:
+   javac CitySearch.java
+3. Run the program using the following command:
+   java CitySearch
+
+Sample Outputs:
+Case 1: City is found in the list
+--------------------------------
+Enter the city name to search: Mumbai
+Mumbai found in the list.
+
+Case 2: City is not found in the list
+-------------------------------------
+Enter the city name to search: Kolkata
+Exception: NoMatchFoundException: Kolkata is not in the list.
+*/

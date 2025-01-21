@@ -1,0 +1,53 @@
+// File Name: FibonacciSeries.java
+
+public class FibonacciSeries {
+    public static void main(String[] args) {
+        if (args.length == 0) {
+            System.out.println("Please provide the length of the Fibonacci series as a command-line argument.");
+            return;
+        }
+
+        try {
+            int n = Integer.parseInt(args[0]);
+            if (n <= 0) {
+                System.out.println("Please enter a positive integer for the length.");
+                return;
+            }
+
+            System.out.println("Fibonacci series of length " + n + ":");
+            int a = 0, b = 1;
+            for (int i = 0; i < n; i++) {
+                System.out.print(a + " ");
+                int next = a + b;
+                a = b;
+                b = next;
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input. Please enter a valid positive integer.");
+        }
+    }
+}
+
+/*
+Steps to Run:
+1. Save the file as FibonacciSeries.java.
+2. Compile the file:
+   javac FibonacciSeries.java
+3. Run the program with the length of the series as a command-line argument:
+   java FibonacciSeries 10
+
+Sample Output:
+- Input: java FibonacciSeries 10
+  Output: Fibonacci series of length 10:
+          0 1 1 2 3 5 8 13 21 34 
+
+- Input: java FibonacciSeries 5
+  Output: Fibonacci series of length 5:
+          0 1 1 2 3 
+
+- Input: java FibonacciSeries -3
+  Output: Please enter a positive integer for the length.
+
+- Input: java FibonacciSeries abc
+  Output: Invalid input. Please enter a valid positive integer.
+*/

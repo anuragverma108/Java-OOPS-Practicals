@@ -1,0 +1,121 @@
+// File Name: ThreadPriorityExample.java
+import java.util.Scanner;
+
+class MyThread extends Thread {
+    public MyThread(String name) {
+        super(name); // Set thread name
+    }
+    
+    @Override
+    public void run() {
+        // Print the thread's name and priority
+        System.out.println("Thread Name: " + Thread.currentThread().getName() +
+                         ", Priority: " + Thread.currentThread().getPriority());
+    }
+}
+
+public class ThreadPriorityExample {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        // Create 3 threads
+        MyThread thread1 = new MyThread("Thread-1");
+        MyThread thread2 = new MyThread("Thread-2");
+        MyThread thread3 = new MyThread("Thread-3");
+
+        try {
+            System.out.println("Set priorities for threads (1-10):");
+            
+            // Get priority for thread1
+            System.out.print("Enter priority for Thread-1: ");
+            int priority1 = scanner.nextInt();
+            if (priority1 < 1 || priority1 > 10) {
+                throw new IllegalArgumentException("Priority must be between 1 and 10");
+            }
+            thread1.setPriority(priority1);
+
+            // Get priority for thread2
+            System.out.print("Enter priority for Thread-2: ");
+            int priority2 = scanner.nextInt();
+            if (priority2 < 1 || priority2 > 10) {
+                throw new IllegalArgumentException("Priority must be between 1 and 10");
+            }
+            thread2.setPriority(priority2);
+
+            // Get priority for thread3
+            System.out.print("Enter priority for Thread-3: ");
+            int priority3 = scanner.nextInt();
+            if (priority3 < 1 || priority3 > 10) {
+                throw new IllegalArgumentException("Priority must be between 1 and 10");
+            }
+            thread3.setPriority(priority3);
+
+            // Start the threads
+            System.out.println("\nStarting threads with user-defined priorities...");
+            thread1.start();
+            thread2.start();
+            thread3.start();
+
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error: " + e.getMessage());
+            System.out.println("Using default priorities instead:");
+            thread1.setPriority(Thread.MIN_PRIORITY);  // Priority 1
+            thread2.setPriority(Thread.NORM_PRIORITY); // Priority 5
+            thread3.setPriority(Thread.MAX_PRIORITY);  // Priority 10
+            
+            thread1.start();
+            thread2.start();
+            thread3.start();
+        } catch (Exception e) {
+            System.out.println("Invalid input! Using default priorities:");
+            thread1.setPriority(Thread.MIN_PRIORITY);  // Priority 1
+            thread2.setPriority(Thread.NORM_PRIORITY); // Priority 5
+            thread3.setPriority(Thread.MAX_PRIORITY);  // Priority 10
+            
+            thread1.start();
+            thread2.start();
+            thread3.start();
+        } finally {
+            scanner.close();
+        }
+    }
+}
+
+/*
+Steps to run the file:
+1. Save the file as "ThreadPriorityExample.java".
+2. Open a terminal or command prompt.
+3. Navigate to the directory where the file is saved.
+4. Compile the Java file:
+   javac ThreadPriorityExample.java
+5. Run the compiled program:
+   java ThreadPriorityExample
+
+Sample Output 1 (Valid priorities):
+Set priorities for threads (1-10):
+Enter priority for Thread-1: 3
+Enter priority for Thread-2: 6
+Enter priority for Thread-3: 9
+
+Starting threads with user-defined priorities...
+Thread Name: Thread-1, Priority: 3
+Thread Name: Thread-2, Priority: 6
+Thread Name: Thread-3, Priority: 9
+
+Sample Output 2 (Invalid priority):
+Set priorities for threads (1-10):
+Enter priority for Thread-1: 15
+Error: Priority must be between 1 and 10
+Using default priorities instead:
+Thread Name: Thread-1, Priority: 1
+Thread Name: Thread-2, Priority: 5
+Thread Name: Thread-3, Priority: 10
+
+Sample Output 3 (Invalid input):
+Set priorities for threads (1-10):
+Enter priority for Thread-1: abc
+Invalid input! Using default priorities:
+Thread Name: Thread-1, Priority: 1
+Thread Name: Thread-2, Priority: 5
+Thread Name: Thread-3, Priority: 10
+*/

@@ -1,0 +1,41 @@
+// File Name: PalindromeCheck.java
+
+public class PalindromeCheck {
+    public static void main(String[] args) {
+        if (args.length == 0) {
+            System.out.println("Please provide a string as a command-line argument.");
+            return;
+        }
+
+        String input = args[0];
+        String reversed = new StringBuilder(input).reverse().toString();
+
+        if (input.equals(reversed)) {
+            System.out.println(input + " is a palindrome.");
+        } else {
+            System.out.println(input + " is not a palindrome.");
+        }
+    }
+}
+
+/*
+Steps to Run:
+1. Save the file as PalindromeCheck.java.
+2. Compile the file:
+   javac PalindromeCheck.java
+3. Run the program with a string as a command-line argument:
+   java PalindromeCheck radar
+
+Sample Output:
+- Input: java PalindromeCheck radar
+  Output: radar is a palindrome.
+
+- Input: java PalindromeCheck hello
+  Output: hello is not a palindrome.
+
+- Input: java PalindromeCheck racecar
+  Output: racecar is a palindrome.
+
+- Input: java PalindromeCheck abc
+  Output: abc is not a palindrome.
+*/

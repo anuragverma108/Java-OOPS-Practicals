@@ -1,0 +1,107 @@
+import java.util.Scanner;
+
+// Base class: Point
+class Point {
+    // Data members for coordinates
+    protected int x;
+    protected int y;
+
+    // Constructor to initialize coordinates
+    public Point(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    // Method to display the coordinates of the point
+    public void displayCoordinates() {
+        System.out.println("Point coordinates: (" + x + ", " + y + ")");
+    }
+}
+
+// Subclass: ColoredPoint inheriting from Point
+class ColoredPoint extends Point {
+    // Data member for color
+    private String color;
+
+    // Constructor to initialize coordinates and color
+    public ColoredPoint(int x, int y, String color) {
+        super(x, y); // Calling the constructor of the Point class
+        this.color = color;
+    }
+
+    // Method to change the color of the point
+    public void changeColor(String newColor) {
+        this.color = newColor;
+    }
+
+    // Method to display the full information (coordinates + color)
+    public void displayInfo() {
+        displayCoordinates(); // Call method from base class
+        System.out.println("Color: " + color);
+    }
+}
+
+// Main class to test the functionality
+public class ColoredPointTest {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Prompt the user for coordinates
+        System.out.print("Enter x-coordinate: ");
+        int x = scanner.nextInt();
+
+        System.out.print("Enter y-coordinate: ");
+        int y = scanner.nextInt();
+
+        // Consume the newline character left by nextInt()
+        scanner.nextLine();
+
+        // Prompt the user for the initial color
+        System.out.print("Enter the initial color: ");
+        String initialColor = scanner.nextLine();
+
+        // Create an object of ColoredPoint
+        ColoredPoint cp = new ColoredPoint(x, y, initialColor);
+
+        // Display initial information
+        System.out.println("\nInitial information of ColoredPoint:");
+        cp.displayInfo();
+
+        // Prompt the user for a new color
+        System.out.print("\nEnter a new color to change: ");
+        String newColor = scanner.nextLine();
+
+        // Change the color
+        cp.changeColor(newColor);
+
+        // Display updated information
+        System.out.println("\nAfter changing the color:");
+        cp.displayInfo();
+
+        scanner.close();
+    }
+}
+
+/*
+Steps to Run:
+1. Save the file as ColoredPoint.java.
+2. Compile the file:
+   javac ColoredPoint.java
+3. Run the program:
+   java ColoredPointTest
+
+Sample Output:
+Enter x-coordinate: 5
+Enter y-coordinate: 10
+Enter the initial color: Red
+
+Initial information of ColoredPoint:
+Point coordinates: (5, 10)
+Color: Red
+
+Enter a new color to change: Blue
+
+After changing the color:
+Point coordinates: (5, 10)
+Color: Blue
+*/

@@ -1,0 +1,94 @@
+// File Name: FibonacciPrimeThreads.java
+
+class FibonacciThread extends Thread {
+    private int n; // Number of terms in Fibonacci series
+
+    public FibonacciThread(int n) {
+        this.n = n; // Initialize number of terms
+    }
+
+    @Override
+    public void run() {
+        // Fibonacci series logic
+        int first = 0, second = 1;
+        System.out.println("Fibonacci Series:");
+        for (int i = 0; i < n; i++) {
+            System.out.print(first + " ");
+            int next = first + second;
+            first = second;
+            second = next;
+            try {
+                Thread.sleep(1000); // 1000ms delay between terms
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        System.out.println();
+    }
+}
+
+class PrimeThread extends Thread {
+    private int start, end; // Range for prime numbers
+
+    public PrimeThread(int start, int end) {
+        this.start = start; // Initialize range start
+        this.end = end;     // Initialize range end
+    }
+
+    @Override
+    public void run() {
+        // Prime number logic
+        System.out.println("Prime Numbers:");
+        for (int i = start; i <= end; i++) {
+            if (isPrime(i)) {
+                System.out.print(i + " ");
+            }
+            try {
+                Thread.sleep(500); // 500ms delay between primes
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        System.out.println();
+    }
+
+    // Helper method to check if a number is prime
+    private boolean isPrime(int num) {
+        if (num <= 1) return false;
+        for (int i = 2; i <= Math.sqrt(num); i++) {
+            if (num % i == 0) return false;
+        }
+        return true;
+    }
+}
+
+public class FibonacciPrimeThreads {
+    public static void main(String[] args) {
+        // Create and start threads
+        FibonacciThread fibThread = new FibonacciThread(10); // Fibonacci for 10 terms
+        PrimeThread primeThread = new PrimeThread(10, 50);  // Prime numbers from 10 to 50
+
+        fibThread.start();  // Start Fibonacci thread
+        primeThread.start(); // Start Prime thread
+    }
+}
+
+/*
+Steps to run the file:
+
+1. Save the file as "FibonacciPrimeThreads.java".
+2. Open a terminal or command prompt.
+3. Navigate to the directory where the file is saved.
+4. Compile the Java file:
+   javac FibonacciPrimeThreads.java
+5. Run the compiled program:
+   java FibonacciPrimeThreads
+
+Sample Output:
+
+Fibonacci Series:
+0 1 1 2 3 5 8 13 21 34 
+
+Prime Numbers:
+11 13 17 19 23 29 31 37 41 43 47
+*/

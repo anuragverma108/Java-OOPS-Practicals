@@ -1,0 +1,66 @@
+// File Name: StarPattern.java
+
+public class StarPattern {
+    public static void main(String[] args) {
+        if (args.length == 0) {
+            System.out.println("Please provide the value of n as a command-line argument.");
+            return;
+        }
+
+        try {
+            int n = Integer.parseInt(args[0]);
+            if (n <= 0) {
+                System.out.println("Please enter a positive integer for n.");
+                return;
+            }
+
+            // Generate and print the star pattern
+            System.out.println("Generated Star Pattern:");
+            for (int i = 1; i <= n; i++) {
+                // Print spaces
+                for (int j = 1; j <= n - i; j++) {
+                    System.out.print(" ");
+                }
+                // Print stars
+                for (int k = 1; k <= i; k++) {
+                    System.out.print("*");
+                }
+                System.out.println();
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input. Please enter a valid integer for n.");
+        }
+    }
+}
+
+/*
+Steps to Run:
+1. Save the file as StarPattern.java.
+2. Compile the file:
+   javac StarPattern.java
+3. Run the program with a positive integer n as a command-line argument:
+   java StarPattern 5
+
+Sample Output:
+- Input: java StarPattern 5
+  Output:
+          *
+         **
+        ***
+       ****
+      *****
+
+- Input: java StarPattern 3
+  Output:
+          *
+         **
+        ***
+
+- Input: java StarPattern 0
+  Output:
+          Please enter a positive integer for n.
+
+- Input: java StarPattern abc
+  Output:
+          Invalid input. Please enter a valid integer for n.
+*/

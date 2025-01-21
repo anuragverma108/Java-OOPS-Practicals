@@ -1,0 +1,81 @@
+// File Name: VolumeCalculatorCLI.java
+
+public class VolumeCalculatorCLI {
+
+    // Volume class with overloaded methods for different shapes
+    static class Volume {
+
+        // Method to calculate the volume of a Cube
+        public double calculateVolume(double side) {
+            return Math.pow(side, 3);
+        }
+
+        // Method to calculate the volume of a Cylinder
+        public double calculateVolume(double radius, double height) {
+            return Math.PI * Math.pow(radius, 2) * height;
+        }
+
+        // Method to calculate the volume of an Ellipsoid
+        public double calculateVolume(double a, double b, double c) {
+            return (4.0 / 3.0) * Math.PI * a * b * c;
+        }
+    }
+
+    // Main method to demonstrate the Volume class using command line arguments
+    public static void main(String[] args) {
+
+        if (args.length == 0) {
+            System.out.println("Please provide the shape and dimensions as command line arguments.");
+            System.exit(1);
+        }
+
+        // Parse command line arguments
+        String shape = args[0].toLowerCase();
+        Volume volume = new Volume();
+
+        try {
+            // Based on the shape type, calculate volume
+            if (shape.equals("cube") && args.length == 2) {
+                double side = Double.parseDouble(args[1]);
+                System.out.println("Volume of Cube: " + volume.calculateVolume(side));
+            } else if (shape.equals("cylinder") && args.length == 3) {
+                double radius = Double.parseDouble(args[1]);
+                double height = Double.parseDouble(args[2]);
+                System.out.println("Volume of Cylinder: " + volume.calculateVolume(radius, height));
+            } else if (shape.equals("ellipsoid") && args.length == 4) {
+                double a = Double.parseDouble(args[1]);
+                double b = Double.parseDouble(args[2]);
+                double c = Double.parseDouble(args[3]);
+                System.out.println("Volume of Ellipsoid: " + volume.calculateVolume(a, b, c));
+            } else {
+                System.out.println("Invalid number of arguments for the specified shape.");
+            }
+
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input. Please enter valid numeric values for dimensions.");
+        }
+    }
+}
+
+/*
+Steps to Run:
+1. Save the file as VolumeCalculatorCLI.java.
+2. Compile the file:
+   javac VolumeCalculatorCLI.java
+3. Run the program with appropriate arguments:
+   java VolumeCalculatorCLI <shape> <dimension1> <dimension2> <dimension3>
+
+Example Commands:
+
+1. For Cube (side = 3):
+   java VolumeCalculatorCLI cube 3
+   Output: Volume of Cube: 27.0
+
+2. For Cylinder (radius = 4, height = 5):
+   java VolumeCalculatorCLI cylinder 4 5
+   Output: Volume of Cylinder: 251.32741228718345
+
+3. For Ellipsoid (a = 3, b = 4, c = 5):
+   java VolumeCalculatorCLI ellipsoid 3 4 5
+   Output: Volume of Ellipsoid: 251.32741228718345
+*/

@@ -1,0 +1,76 @@
+// File Name: CitySorter.java
+
+public class CitySorter {
+    public static void main(String[] args) {
+        // Predefined list of valid city names
+        String[] validCities = {"Kolkata", "Chennai", "Mumbai", "Delhi", "Bangalore", "Ahmedabad"};
+
+        if (args.length == 0) {
+            System.out.println("Please provide city names as command-line arguments.");
+            return;
+        }
+
+        // Collect valid city names from the input
+        String[] inputCities = new String[args.length];
+        int count = 0;
+        for (String city : args) {
+            for (String validCity : validCities) {
+                if (city.equals(validCity)) {
+                    inputCities[count++] = city;
+                    break;
+                }
+            }
+        }
+
+        if (count == 0) {
+            System.out.println("No valid city names provided. Valid cities are: " + String.join(", ", validCities));
+            return;
+        }
+
+        // Resize the array to the number of valid cities
+        String[] validInputCities = new String[count];
+        System.arraycopy(inputCities, 0, validInputCities, 0, count);
+
+        // Sort the valid city names alphabetically using bubble sort
+        for (int i = 0; i < validInputCities.length - 1; i++) {
+            for (int j = 0; j < validInputCities.length - i - 1; j++) {
+                if (validInputCities[j].compareTo(validInputCities[j + 1]) > 0) {
+                    // Swap the cities
+                    String temp = validInputCities[j];
+                    validInputCities[j] = validInputCities[j + 1];
+                    validInputCities[j + 1] = temp;
+                }
+            }
+        }
+
+        System.out.println("Cities in alphabetical order:");
+        for (String city : validInputCities) {
+            System.out.print(city + " ");
+        }
+    }
+}
+
+/*
+Steps to Run:
+1. Save the file as CitySorter.java.
+2. Compile the file:
+   javac CitySorter.java
+3. Run the program with city names as command-line arguments:
+   java CitySorter Mumbai Chennai Kolkata Delhi Bangalore Ahmedabad
+
+Sample Output:
+- Input: java CitySorter Mumbai Chennai Kolkata Delhi Bangalore Ahmedabad
+  Output: Cities in alphabetical order:
+          Ahmedabad Bangalore Chennai Delhi Kolkata Mumbai
+
+- Input: java CitySorter Kolkata Delhi
+  Output: Cities in alphabetical order:
+          Delhi Kolkata
+
+- Input: java CitySorter xyz abc
+  Output: No valid city names provided. Valid cities are: Kolkata, Chennai, Mumbai, Delhi, Bangalore, Ahmedabad.
+
+- Input: java CitySorter Kolkata xyz Chennai
+  Output: Cities in alphabetical order:
+          Chennai Kolkata
+*/

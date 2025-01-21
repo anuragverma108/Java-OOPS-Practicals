@@ -1,0 +1,67 @@
+// File Name: FullPyramidPattern.java
+
+public class FullPyramidPattern {
+    public static void main(String[] args) {
+        if (args.length == 0) {
+            System.out.println("Please provide the value of n as a command-line argument.");
+            return;
+        }
+
+        try {
+            int n = Integer.parseInt(args[0]);
+            if (n <= 0) {
+                System.out.println("Please enter a positive integer for n.");
+                return;
+            }
+
+            // Generate and print the full pyramid pattern
+            System.out.println("Generated Full Pyramid Pattern:");
+            for (int i = 1; i <= n; i++) {
+                // Print leading spaces
+                for (int j = 1; j <= n - i; j++) {
+                    System.out.print(" ");
+                }
+                // Print stars
+                for (int k = 1; k <= (2 * i - 1); k++) {
+                    System.out.print("*");
+                }
+                // Move to the next line
+                System.out.println();
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input. Please enter a valid integer for n.");
+        }
+    }
+}
+
+/*
+Steps to Run:
+1. Save the file as FullPyramidPattern.java.
+2. Compile the file:
+   javac FullPyramidPattern.java
+3. Run the program with a positive integer n as a command-line argument:
+   java FullPyramidPattern 5
+
+Sample Output:
+- Input: java FullPyramidPattern 5
+  Output:
+          *
+         ***
+        *****
+       *******
+      *********
+
+- Input: java FullPyramidPattern 3
+  Output:
+          *
+         ***
+        *****
+
+- Input: java FullPyramidPattern 0
+  Output:
+          Please enter a positive integer for n.
+
+- Input: java FullPyramidPattern abc
+  Output:
+          Invalid input. Please enter a valid integer for n.
+*/
