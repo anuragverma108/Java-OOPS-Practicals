@@ -1,0 +1,70 @@
+Using Priority for Threads
+
+// Using priority for threads
+public class ThreadDemo4 extends Thread
+{
+	 private String threadName;
+	 
+	 public ThreadDemo4(String name){
+	     this.threadName = name;
+	 }
+
+     public void run() {
+		 
+		 System.out.print("\t"+this.threadName+" : ID=" + Thread.currentThread().getId());
+		 System.out.println(" Priority= "+ Thread.currentThread().getPriority());
+			 
+		 for( int i=0; i < 10 ; i++ ){
+		     System.out.println(this.threadName+" : " + i);
+			 try {
+				 Thread.sleep(10); // increase this value and see the changes in the output
+			 } catch (InterruptedException e) {
+			 	 System.out.println("Thread has been interrupted");
+			 }
+		 }	
+
+     }
+	 
+	 public static void main(String[] args) {
+         ThreadDemo4 t1 = new ThreadDemo4("Thread#1");
+         ThreadDemo4 t2 = new ThreadDemo4("Thread#2");
+		 
+		 System.out.println("\t"+t1.threadName+" : ID=" + t1.getId() + " Default Priority= "+ t1.getPriority());
+		 System.out.println("\t"+t2.threadName+" : ID=" + t2.getId() + " Default Priority= "+ t2.getPriority());
+		
+		 t1.setPriority(1);  // Set the priority of Thread#1 to the lowest (1)
+		 t2.setPriority(10); // Set the priority of Thread#2 to the highest (10)
+		 
+         t1.start(); 
+         t2.start();
+
+     }
+    
+}
+
+
+Output:
+	Thread#1 : ID=12 Default Priority= 5
+	Thread#2 : ID=13 Default Priority= 5
+	Thread#1 : ID=12 Priority= 1
+	Thread#2 : ID=13 Priority= 10
+	Thread#2 : 0
+	Thread#2 : 1
+	Thread#2 : 2
+	Thread#2 : 3
+	Thread#2 : 4
+	Thread#2 : 5
+	Thread#2 : 6
+	Thread#2 : 7
+	Thread#2 : 8
+	Thread#2 : 9
+	Thread#1 : 0
+	Thread#1 : 1
+	Thread#1 : 2
+	Thread#1 : 3
+	Thread#1 : 4
+	Thread#1 : 5
+	Thread#1 : 6
+	Thread#1 : 7
+	Thread#1 : 8
+	Thread#1 : 9

@@ -1,0 +1,67 @@
+Overriding the start() Method in Threads (Concurrency Issue)
+
+
+// concurrent access will not be activated if start() is overridden.
+/* Whenever we override start() method then our start() method will be executed just like a normal method call and new 
+   thread wont be created. We can override start/run method of Thread class because it is not final. But it is not recommended 
+   to override start() method, otherwise it ruins multi-threading concept.
+*/
+public class ThreadDemo3 extends Thread
+{
+	 private String threadName;
+	 
+	 public ThreadDemo3(String name){
+	     this.threadName = name;
+	 }
+	 
+	 public void start() { // concurrent access will not be activated if this method is overridden.
+	     this.threadName = "Thread#" + this.threadName; 
+		 run();
+	 }
+		
+
+     public void run() {
+		 for( int i=0; i < 10 ; i++ ){
+		     System.out.println(this.threadName+" : " + i);
+			 try {
+				 Thread.sleep(1000);
+			 } catch (InterruptedException e) {
+			 	 System.out.println("Thread has been interrupted");
+			 }
+		 }		
+     }
+	 
+	 public static void main(String[] args) {
+         ThreadDemo3 t1 = new ThreadDemo3("1");
+         ThreadDemo3 t2 = new ThreadDemo3("2");
+		
+         t1.start();
+         t2.start(); 
+
+     }
+    
+}
+
+
+Output:
+
+Thread#1 : 0
+Thread#1 : 1
+Thread#1 : 2
+Thread#1 : 3
+Thread#1 : 4
+Thread#1 : 5
+Thread#1 : 6
+Thread#1 : 7
+Thread#1 : 8
+Thread#1 : 9
+Thread#2 : 0
+Thread#2 : 1
+Thread#2 : 2
+Thread#2 : 3
+Thread#2 : 4
+Thread#2 : 5
+Thread#2 : 6
+Thread#2 : 7
+Thread#2 : 8
+Thread#2 : 9

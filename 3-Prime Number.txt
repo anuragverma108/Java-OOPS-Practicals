@@ -1,0 +1,79 @@
+1. Create a single class to implement the following using suitable methods.
+a) Write a program to show whether the number is prime. Data will be taken from the command line argument.
+b) Write a program to show the prime numbers in a given range using the command line.
+
+
+
+// Class to handle prime number operations
+public class PrimeNumberUtils {
+
+    // Method to check if a number is prime
+    public static boolean isPrime(int number) {
+        if (number <= 1) {
+            return false;
+        }
+        for (int i = 2; i <= Math.sqrt(number); i++) {
+            if (number % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    // Method to display all prime numbers in a given range
+    public static void printPrimesInRange(int start, int end) {
+        System.out.println("Prime numbers between " + start + " and " + end + ":");
+        for (int i = start; i <= end; i++) {
+            if (isPrime(i)) {
+                System.out.print(i + " ");
+            }
+        }
+        System.out.println();
+    }
+
+    // Main method to handle command-line arguments
+    public static void main(String[] args) {
+        if (args.length == 1) {
+            // Part (a): Check if the number is prime
+            int number = Integer.parseInt(args[0]);
+            if (isPrime(number)) {
+                System.out.println(number + " is a prime number.");
+            } else {
+                System.out.println(number + " is not a prime number.");
+            }
+        } else if (args.length == 2) {
+            // Part (b): Print prime numbers in a range
+            int start = Integer.parseInt(args[0]);
+            int end = Integer.parseInt(args[1]);
+            printPrimesInRange(start, end);
+        } else {
+            System.out.println("Invalid number of arguments. Provide 1 argument to check prime or 2 arguments for a range.");
+        }
+    }
+}
+
+
+
+
+
+### Command-Line Usage:
+1. To check if a number is prime:
+   ```
+   java PrimeNumberUtils 17
+   ```
+   Output:
+   ```
+   17 is a prime number.
+   ```
+
+2. To print primes in a range:
+   ```
+   java PrimeNumberUtils 10 20
+   ```
+   Output:
+   ```
+   Prime numbers between 10 and 20:
+   11 13 17 19
+   ```
+
+Let me know if you have more questions!

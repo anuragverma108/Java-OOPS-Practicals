@@ -1,0 +1,62 @@
+1. Write a Java program to create an abstract class named "Student". Now inherit the class and create two subclasses - CseStudent and ItStudent. The class must have an abstract method "giveExam()".
+a) Now, within the main method, create objects of the instantiable classes and call the above-mentioned method on behalf of each object. 
+
+b) Can we create a single reference of the Student class to refer to CseStudent and then ItStudent? Write code and check.   
+
+
+// Abstract class Student
+abstract class Student {
+    // Abstract method giveExam
+    abstract void giveExam();
+}
+
+// CseStudent class inheriting Student class
+class CseStudent extends Student {
+    @Override
+    void giveExam() {
+        System.out.println("CSE Student is giving the Computer Science exam.");
+    }
+}
+
+// ItStudent class inheriting Student class
+class ItStudent extends Student {
+    @Override
+    void giveExam() {
+        System.out.println("IT Student is giving the Information Technology exam.");
+    }
+}
+
+// Main class to test the code
+public class StudentTest {
+    public static void main(String[] args) {
+        // Creating objects of CseStudent and ItStudent
+        Student cseStudent = new CseStudent();
+        Student itStudent = new ItStudent();
+        
+        // Calling giveExam method using both objects
+        cseStudent.giveExam();
+        itStudent.giveExam();
+        
+        // Checking if we can create a single reference of Student class for both CseStudent and ItStudent
+        Student student1 = new CseStudent();
+        Student student2 = new ItStudent();
+        
+        // Calling giveExam using single reference for both types
+        student1.giveExam();
+        student2.giveExam();
+    }
+}
+
+
+
+Output:
+
+CSE Student is giving the Computer Science exam.
+IT Student is giving the Information Technology exam.
+CSE Student is giving the Computer Science exam.
+IT Student is giving the Information Technology exam.
+
+
+
+Answer to Question:
+Yes, we can create a single reference of the Student class to refer to both CseStudent and ItStudent because of polymorphism in Java. A parent reference (Student) can hold child class objects (CseStudent, ItStudent). This allows dynamic method dispatch, where the appropriate overridden method is called based on the object type (CSE or IT).

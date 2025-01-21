@@ -1,0 +1,599 @@
+Classes & Objects:
+
+class Pen {
+    String color;
+    String type;
+    
+public void Write(){
+    System.out.println("It write something!");
+}
+
+public void printColor(){
+    System.out.println(this.color);
+} 
+}
+
+class Student{
+    String name;
+    int age;
+
+    public void printInfo(){
+        System.out.println("name :" + this.name);
+        System.out.println("age :" + this.age);
+    }
+}
+
+
+public class OOPS {
+    public static void main(String args[]){
+        Student s1 = new Student();
+        s1.name = "Anurag";
+        s1.age = 21;
+
+        s1.printInfo();
+
+        
+
+    }
+}
+
+
+_____________________________________________________________________________________________________________________________________________________________________________________________________
+
+Constructors:
+
+1. Non parametrized Constructor
+
+class Student{
+    
+    String name;
+    int age;
+    
+    public void printInfo(){
+        System.out.println(name + " " + age);
+    }
+    
+    Student(){
+        System.out.println("constructor defined by user, it will be called first when a new student object will be created");
+    }
+}
+
+
+
+public class Main {
+    public static void main(String[] args) {
+        
+        Student s1 = new Student();
+        s1.name = "Anurag";
+        s1.age = 20;
+        
+        s1.printInfo();
+     
+    }
+}
+
+_____________________________________________________________________________________________________________________________________________________________________________________________________
+
+2. Paramterized Constructor
+
+class Student{
+    
+    String name;
+    int age;
+    
+    public void printInfo(){
+        System.out.println(name + " " + age);
+    }
+    
+    Student(String Naam, int Umra){
+        this.name = Naam;
+        this.age = Umra;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        
+        Student s1 = new Student("Anurag",24);
+        
+        s1.printInfo();
+     
+    }
+}
+
+_____________________________________________________________________________________________________________________________________________________________________________________________________
+
+3. Copy Constructor 
+
+
+
+class Student{
+    
+    String name;
+    int age;
+    
+    public void printInfo(){
+        System.out.println(name + " " + age);
+    }
+    
+    Student(){ 
+        // default case constructor ----> mandatory to make		(Yha pe ek dafault case constructor bhi bnana hoga to create a object by normal method)
+    }
+    
+    Student(Student s2){
+        this.name = s2.name;
+        this.age = s2.age;
+    }
+}
+
+
+public class Main {
+    public static void main(String[] args) {
+        
+        Student s1 = new Student();
+        s1.name = "Aman";
+        s1.age = 30;
+        
+        
+        Student s2 = new Student(s1);
+        s2.printInfo();
+        
+     
+    }
+}
+
+
+_____________________________________________________________________________________________________________________________________________________________________________________________________
+
+Polymorphism
+
+1. Compile Time Polymorphism
+
+Method Overloading :
+
+class Student{
+    
+    String name;
+    int age;
+    
+    public void printInfo(String name, int age){
+        System.out.println(name + " " + age);
+    }
+    public void printInfo(String name){
+        System.out.println(name);
+    }
+    public void printInfo(int age){
+        System.out.println(age);
+    }
+   
+}
+
+
+class Main {
+    public static void main(String[] args) {
+        
+        Student s1 = new Student();
+        s1.name = "Aman";
+        s1.age = 30;
+        
+        
+        s1.printInfo(s1.name,s1.age);
+        s1.printInfo(s1.name);
+        s1.printInfo(s1.age);
+        
+      
+     
+    }
+}
+
+
+2. Run Time Polymorphism 
+
+Method Overiding:
+
+class Animal {
+    void sound() {
+        System.out.println("Animals make sounds");
+    }
+}
+
+class Dog extends Animal {
+    @Override
+    void sound() {
+        System.out.println("Dog barks");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Animal myDog = new Dog();
+        myDog.sound();  // Output: Dog barks
+    }
+}
+
+
+_____________________________________________________________________________________________________________________________________________________________________________________________________
+
+Inheritance
+
+class Shape{
+    String color;
+}
+
+class Triangle extends Shape{
+    
+}
+
+class Main {
+    public static void main(String[] args) {
+     
+     Triangle t1 = new Triangle();
+     t1.color = "red";
+     
+     System.out.println(t1.color);
+     
+     
+    }
+}
+
+_____________________________________________________________________________________________________________________________________________________________________________________________________
+
+1. Single Level Inheritance
+
+class Shape{
+   public void area(){
+       System.out.println("Display Area");
+   }
+}
+
+class Triangle extends Shape{
+     public void area(int height, int width){
+       System.out.println(0.5 * height * width);
+       
+   }
+    
+}
+
+class Main {
+    public static void main(String[] args) {
+     
+     Triangle t1 = new Triangle();
+    t1.area(20,10);
+     
+     
+    }
+}
+
+_____________________________________________________________________________________________________________________________________________________________________________________________________
+
+
+2. Multi Level Inheritance
+
+class Shape {
+    public void area() {
+        System.out.println("Display Area");
+    }
+}
+
+class Triangle extends Shape {
+    public void area(int height, int width) {
+        System.out.println(0.5 * height * width);
+    }
+}
+
+class EquiTriangle extends Triangle {
+    public void area(int side) {
+        System.out.println(0.5 * side * side);
+    }
+}
+
+class Main {
+    public static void main(String[] args) {
+        EquiTriangle e1 = new EquiTriangle();
+        e1.area(4); 
+    }
+}
+
+
+_____________________________________________________________________________________________________________________________________________________________________________________________________
+
+3. . Hierarchical inheritance
+
+class Shape {
+    public void area() {
+        System.out.println("Display Area");
+    }
+}
+
+class Triangle extends Shape {
+    public void area(int height, int width) {
+        System.out.println(0.5 * height * width);
+    }
+}
+
+class Circle extends Shape{
+    public void area(double r){
+        System.out.println((3.14)* r * r );
+    }
+}
+
+class Main {
+    public static void main(String[] args) {
+        Circle c1 = new Circle();
+        c1.area(6.7);
+       
+    }
+}
+
+
+_____________________________________________________________________________________________________________________________________________________________________________________________________
+
+4. Multiple Inheritance      (implemented in java using interfaces)
+
+
+interface Animal{
+   int eyes = 2;
+   public void walks();
+}
+
+interface Herbivore{
+    String type =  "P";
+}
+
+class Horse implements Animal, Herbivore{       // This is Multiple Inheritance
+    public void walks(){
+        System.out.println("Walks on 4 legs");
+    }
+}
+
+
+public class Interfaces {
+    public static void main(String[] args) {
+        Horse h1 = new Horse();
+        h1.walks();
+        System.out.println(h1.type);
+    }
+}
+
+_____________________________________________________________________________________________________________________________________________________________________________________________________
+
+
+Access Modifiers in Java
+
+1.Public		 	  public String name;
+2.Private 		  	  private String password;
+3.Protected 		  	  protected String email;
+4.Default			  String Address;
+
+class Account{
+    public String name;
+    protected String email;
+    private String password;
+
+
+    // getters & setters --> used for private Access Modifiers
+    public String getPassword(){
+        return this.password;
+    }
+
+    public void setPassword(String pass){
+        this.password = pass;
+    }
+}
+
+
+public class Bank{
+    public static void main(String[] args){
+        Account a1 = new Account();
+        a1.name = "SBI Naini";
+        a1.email = "sbinaini@gmail.com";
+        System.out.println(a1.name);
+
+        // a1.password = "ad";  //-> can't be done because it is private
+        a1.setPassword("abcd");
+
+        System.out.println(a1.getPassword());
+    }
+    
+}
+
+
+
+_____________________________________________________________________________________________________________________________________________________________________________________________________
+
+Packages
+
+
+C:\Users\anura\Desktop\Java OOPS\DemoPackage.java
+
+import tools.*;
+
+
+public class DemoPackage {
+    public static void main(String[] args) {
+       
+    Calc c1 = new Calc();
+    }
+}
+
+
+
+C:\Users\anura\Desktop\Java OOPS\tools\Calc.java
+
+package tools;
+
+public class Calc {
+    public static void main(String[] args) {
+        
+
+
+    }
+}
+
+
+
+_____________________________________________________________________________________________________________________________________________________________________________________________________
+
+Encapsulation
+
+To implement proper encapsulation:
+
+Always make attributes private.
+Use public methods (getters/setters) to control access and modification. This ensures data hiding, validation, and better maintainability of the code.
+
+class Student {
+    // Private data members
+    private String name;
+    private int age;
+
+    // Public getter for 'name'
+    public String getName() {
+        return name;
+    }
+
+    // Public setter for 'name'
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    // Public getter for 'age'
+    public int getAge() {
+        return age;
+    }
+
+    // Public setter for 'age'
+    public void setAge(int age) {
+        if (age > 0) { // Adding validation
+            this.age = age;
+        } else {
+            System.out.println("Age must be a positive number.");
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Student s1 = new Student();
+        
+        // Setting values using setter methods
+        s1.setName("Anurag");
+        s1.setAge(20);
+
+        // Accessing values using getter methods
+        System.out.println("Name: " + s1.getName());
+        System.out.println("Age: " + s1.getAge());
+    }
+}
+
+_____________________________________________________________________________________________________________________________________________________________________________________________________
+
+Abstraction
+
+abstract class Animal{
+    int weight;
+    abstract  void walk();
+    public void eats(){
+        System.out.println("Animal eats");
+    }
+
+    Animal(){
+        System.out.println("Animal is Created");
+    }
+}
+
+class Horse extends Animal{
+    public void walk(){
+        System.out.println("walk on 4 legs");
+    }
+
+}
+
+class Chicken extends Animal{
+
+    public void walk(){
+        System.out.println("walk on 2 legs");
+    }
+
+    Chicken(){
+        System.out.println("Chicken is created");
+    }
+}
+
+
+
+public class Abstraction {
+    public static void main(String[] args){
+        Chicken c1 = new Chicken();
+        c1.weight = 50;
+
+        c1.walk();
+        System.out.println(c1.weight);
+
+        c1.eats();
+
+    }
+}
+
+_____________________________________________________________________________________________________________________________________________________________________________________________________
+
+Pure Abstraction using Interfaces
+
+
+
+interface Animal{
+   int eyes = 2;
+   public void walks();
+}
+
+interface Herbivore{
+    String type =  "P";
+}
+
+class Horse implements Animal, Herbivore{       // This is Multiple Inheritance
+    public void walks(){
+        System.out.println("Walks on 4 legs");
+    }
+}
+
+
+public class Interfaces {
+    public static void main(String[] args) {
+        Horse h1 = new Horse();
+        h1.walks();
+        System.out.println(h1.type);
+    }
+}
+
+
+_____________________________________________________________________________________________________________________________________________________________________________________________________
+
+Static Keyword
+
+
+class Student{
+    int age;
+    String name;
+    static String School;
+
+    public static void changeSchool(String newSchool) {
+        School = newSchool;
+    }
+}
+
+
+public class Static_Keyword {
+
+    public static void main(String[] args){
+    Student.School = "MVM";
+
+
+    Student s1 = new Student();
+    System.out.println(s1.School);
+
+    Student.changeSchool("BCS");
+    System.out.println(s1.School);
+}
+}
+_____________________________________________________________________________________________________________________________________________________________________________________________________
+
+~ Notes By Anurag Bytes

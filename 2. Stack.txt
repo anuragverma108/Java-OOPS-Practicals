@@ -1,0 +1,116 @@
+A. Creat a class to represent stack (for
+integer data).
+B. Now, create another class to evaluate
+any postfix expression (having +,-,*, / as
+operators and single digit numbers as
+operands. This class should use the above
+Stack class.
+
+2*3+1 ===> 23*1+   (answer 7)
+
+
+// Class to represent a stack of integers
+class Stack {
+    private int[] stack;
+    private int top;
+
+    // Constructor to initialize the stack
+    public Stack(int size) {
+        stack = new int[size];
+        top = -1;
+    }
+
+    // Push an element onto the stack
+    public void push(int value) {
+        if (top == stack.length - 1) {
+            System.out.println("Stack overflow");
+        } else {
+            stack[++top] = value;
+        }
+    }
+
+    // Pop an element from the stack
+    public int pop() {
+        if (top == -1) {
+            System.out.println("Stack underflow");
+            return -1; // Return -1 for underflow
+        } else {
+            return stack[top--];
+        }
+    }
+
+    // Check if the stack is empty
+    public boolean isEmpty() {
+        return top == -1;
+    }
+}
+
+// Class to evaluate postfix expressions
+class PostfixEvaluator {
+    private Stack stack;
+
+    // Constructor to initialize the evaluator with a stack
+    public PostfixEvaluator(int size) {
+        stack = new Stack(size);
+    }
+
+    // Method to evaluate a postfix expression
+    public int evaluate(String expression) {
+        for (int i = 0; i < expression.length(); i++) {
+            char ch = expression.charAt(i);
+
+            // If the character is an operand (digit), push it onto the stack
+            if (Character.isDigit(ch)) {
+                stack.push(ch - '0'); // Convert char to integer
+            } else {
+                // If the character is an operator, pop two elements from the stack
+                int operand2 = stack.pop();
+                int operand1 = stack.pop();
+                int result;
+
+                // Perform the operation and push the result back onto the stack
+                switch (ch) {
+                    case '+':
+                        result = operand1 + operand2;
+                        break;
+                    case '-':
+                        result = operand1 - operand2;
+                        break;
+                    case '*':
+                        result = operand1 * operand2;
+                        break;
+                    case '/':
+                        result = operand1 / operand2;
+                        break;
+                    default:
+                        throw new IllegalArgumentException("Invalid operator: " + ch);
+                }
+                stack.push(result);
+            }
+        }
+
+        // The final result will be at the top of the stack
+        return stack.pop();
+    }
+}
+
+// Main class to test the Stack and PostfixEvaluator
+public class Main {
+    public static void main(String[] args) {
+        // Create a PostfixEvaluator with a stack size of 10
+        PostfixEvaluator evaluator = new PostfixEvaluator(10);
+
+        // Postfix expression to evaluate: 23*1+
+        String postfixExpression = "23*1+";
+        int result = evaluator.evaluate(postfixExpression);
+
+        // Display the result
+        System.out.println("The result of the postfix expression \"" + postfixExpression + "\" is: " + result);
+    }
+}
+
+
+
+Output :
+
+The result of the postfix expression "23*1+" is: 7

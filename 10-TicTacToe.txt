@@ -1,0 +1,160 @@
+2. create a Tic-Tac-Toe game. Use the following method as the base design. Update this method as per your requirements.
+public void drawGrid(){
+        System.out.println("       |       |       ");    
+        System.out.println("   1   |   2   |   3   ");    
+        System.out.println("       |       |       ");    
+        System.out.println("-----------------------");
+        System.out.println("       |       |       ");    
+        System.out.println("   4   |   5   |   6   ");    
+        System.out.println("       |       |       ");    
+        System.out.println("-----------------------");
+        System.out.println("       |       |       ");    
+        System.out.println("   7   |   8   |   9   ");    
+        System.out.println("       |       |       "); 
+}
+
+
+import java.util.Scanner;
+
+public class TicTacToe {
+    // Create a 3x3 grid represented by an array
+    private String[] grid = {"1", "2", "3", "4", "5", "6", "7", "8", "9"};
+    private String currentPlayer = "X"; // X starts first
+
+    // Method to draw the current grid
+    public void drawGrid() {
+        System.out.println("       |       |       ");
+        System.out.println("   " + grid[0] + "   |   " + grid[1] + "   |   " + grid[2] + "   ");
+        System.out.println("       |       |       ");
+        System.out.println("-----------------------");
+        System.out.println("       |       |       ");
+        System.out.println("   " + grid[3] + "   |   " + grid[4] + "   |   " + grid[5] + "   ");
+        System.out.println("       |       |       ");
+        System.out.println("-----------------------");
+        System.out.println("       |       |       ");
+        System.out.println("   " + grid[6] + "   |   " + grid[7] + "   |   " + grid[8] + "   ");
+        System.out.println("       |       |       ");
+    }
+
+    // Method to handle player move
+    public boolean makeMove(int position) {
+        if (position < 1 || position > 9 || grid[position - 1].equals("X") || grid[position - 1].equals("O")) {
+            return false; // Invalid move if already taken or out of bounds
+        }
+        grid[position - 1] = currentPlayer; // Mark the grid with current player's symbol
+        return true;
+    }
+
+    // Method to check for a winner
+    public boolean checkWinner() {
+        // Check rows, columns, and diagonals for a winning condition
+        for (int i = 0; i < 3; i++) {
+            // Check rows
+            if (grid[i * 3] == grid[i * 3 + 1] && grid[i * 3 + 1] == grid[i * 3 + 2]) {
+                return true;
+            }
+            // Check columns
+            if (grid[i] == grid[i + 3] && grid[i + 3] == grid[i + 6]) {
+                return true;
+            }
+        }
+        // Check diagonals
+        if (grid[0] == grid[4] && grid[4] == grid[8]) {
+            return true;
+        }
+        if (grid[2] == grid[4] && grid[4] == grid[6]) {
+            return true;
+        }
+        return false;
+    }
+
+    // Method to check if the game is a draw
+    public boolean checkDraw() {
+        for (String cell : grid) {
+            if (!cell.equals("X") && !cell.equals("O")) {
+                return false; // There's still an empty space
+            }
+        }
+        return true; // All cells are filled, it's a draw
+    }
+
+    // Method to switch player
+    public void switchPlayer() {
+        currentPlayer = currentPlayer.equals("X") ? "O" : "X"; // Alternate between X and O
+    }
+
+    // Main game loop
+    public void playGame() {
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            drawGrid(); // Draw the current grid
+            System.out.println("Player " + currentPlayer + ", enter your move (1-9): ");
+            int move = scanner.nextInt();
+
+            if (makeMove(move)) {
+                if (checkWinner()) {
+                    drawGrid();
+                    System.out.println("Player " + currentPlayer + " wins!");
+                    break;
+                }
+                if (checkDraw()) {
+                    drawGrid();
+                    System.out.println("The game is a draw.");
+                    break;
+                }
+                switchPlayer(); // Switch to the next player
+            } else {
+                System.out.println("Invalid move! Try again.");
+            }
+        }
+        scanner.close();
+    }
+
+    // Main method to start the game
+    public static void main(String[] args) {
+        TicTacToe game = new TicTacToe();
+        game.playGame(); // Start the game
+    }
+}
+
+
+
+Output:
+       |       |       
+   1   |   2   |   3   
+       |       |       
+-----------------------
+       |       |       
+   4   |   5   |   6   
+       |       |       
+-----------------------
+       |       |       
+   7   |   8   |   9   
+       |       |       
+Player X, enter your move (1-9): 
+1
+       |       |       
+   X   |   2   |   3   
+       |       |       
+-----------------------
+       |       |       
+   4   |   5   |   6   
+       |       |       
+-----------------------
+       |       |       
+   7   |   8   |   9   
+       |       |       
+Player O, enter your move (1-9): 
+5
+       |       |       
+   X   |   2   |   3   
+       |       |       
+-----------------------
+       |       |       
+   4   |   O   |   6   
+       |       |       
+-----------------------
+       |       |       
+   7   |   8   |   9   
+       |       |       
+...

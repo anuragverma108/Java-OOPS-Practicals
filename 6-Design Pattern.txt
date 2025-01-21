@@ -1,0 +1,70 @@
+Create a class named “DesignPattern” with different static methods to draw triangle, rectangle, and square using ‘*’. Demonstrate the class using the main method.
+
+
+// Class to provide methods for drawing patterns
+public class DesignPattern {
+
+    // Method to draw a triangle
+    public static void drawTriangle(int n) {
+        System.out.println("Triangle:");
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= i; j++) {
+                System.out.print("* ");
+            }
+            System.out.println();
+        }
+    }
+
+    // Method to draw a rectangle
+    public static void drawRectangle(int rows, int columns) {
+        System.out.println("Rectangle:");
+        for (int i = 1; i <= rows; i++) {
+            for (int j = 1; j <= columns; j++) {
+                System.out.print("* ");
+            }
+            System.out.println();
+        }
+    }
+
+    // Method to draw a square
+    public static void drawSquare(int side) {
+        System.out.println("Square:");
+        for (int i = 1; i <= side; i++) {
+            for (int j = 1; j <= side; j++) {
+                System.out.print("* ");
+            }
+            System.out.println();
+        }
+    }
+
+    // Main method to demonstrate the patterns
+    public static void main(String[] args) {
+        drawTriangle(5); // Example: Triangle of height 5
+        drawRectangle(4, 6); // Example: Rectangle of 4 rows and 6 columns
+        drawSquare(4); // Example: Square with side 4
+    }
+}
+
+
+
+
+
+Output:
+
+Triangle:
+* 
+* * 
+* * * 
+* * * * 
+* * * * * 
+Rectangle:
+* * * * * * 
+* * * * * * 
+* * * * * * 
+* * * * * * 
+Square:
+* * * * 
+* * * * 
+* * * * 
+* * * * 
+

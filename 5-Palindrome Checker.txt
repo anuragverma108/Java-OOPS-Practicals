@@ -1,0 +1,60 @@
+Take a String as input using a command line argument and check whether it is a palindrome.
+
+// Class to check if a string is a palindrome
+public class PalindromeChecker {
+
+    // Method to check if a string is a palindrome
+    public static boolean isPalindrome(String str) {
+        int left = 0, right = str.length() - 1;
+
+        while (left < right) {
+            if (str.charAt(left) != str.charAt(right)) {
+                return false;
+            }
+            left++;
+            right--;
+        }
+
+        return true;
+    }
+
+    // Main method to take command-line argument and check for palindrome
+    public static void main(String[] args) {
+        if (args.length != 1) {
+            System.out.println("Please provide exactly one string as a command-line argument.");
+            return;
+        }
+
+        String input = args[0];
+        if (isPalindrome(input)) {
+            System.out.println("The string \"" + input + "\" is a palindrome.");
+        } else {
+            System.out.println("The string \"" + input + "\" is not a palindrome.");
+        }
+    }
+}
+
+
+
+
+
+
+
+### Example Execution:
+#### Command:
+```
+java PalindromeChecker racecar
+```
+#### Output:
+```
+The string "racecar" is a palindrome.
+```
+
+#### Command:
+```
+java PalindromeChecker hello
+```
+#### Output:
+```
+The string "hello" is not a palindrome.
+```

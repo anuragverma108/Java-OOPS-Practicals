@@ -1,0 +1,56 @@
+Write a program to display the Fibonacci series of length n (n is user input using Scanner class).
+
+import java.util.Scanner;
+
+// Class to display the Fibonacci series
+public class FibonacciSeries {
+
+    // Method to generate and display Fibonacci series of length n
+    public static void generateFibonacci(int n) {
+        if (n <= 0) {
+            System.out.println("Please enter a positive integer.");
+            return;
+        }
+
+        int first = 0, second = 1;
+
+        System.out.println("Fibonacci series of length " + n + ":");
+
+        for (int i = 1; i <= n; i++) {
+            System.out.print(first + " ");
+            int next = first + second;
+            first = second;
+            second = next;
+        }
+        System.out.println();
+    }
+
+    // Main method to take user input and display the Fibonacci series
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter the length of the Fibonacci series: ");
+        int n = scanner.nextInt();
+
+        generateFibonacci(n);
+
+        scanner.close();
+    }
+}
+
+
+
+
+
+### Example Execution:
+#### Input:
+```
+Enter the length of the Fibonacci series: 5
+```
+#### Output:
+```
+Fibonacci series of length 5:
+0 1 1 2 3
+```
+
+Let me know if you need further clarification!

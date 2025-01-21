@@ -1,0 +1,140 @@
+Create the following classes:
+A. Person - to represent any common person having ID, name, gender, and date of birth.
+B. Voter - to represent a valid voter (minimum 18 years old). The Voter class must have a
+method to register a person as a voter.
+C. InvalidVoterException class which will be thrown when any person below 18 years is tried to register as a voter.
+D. Now, create a suitable program which will do the following:
+1. Create an array of n number of person objects.
+2. create an array of m valid voters (m<n).
+3. Implement voter registration which will demonstrate exceptions also.
+4. List all registered voters.
+5. List all invalid voters.
+
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+// Person class
+class Person {
+    private int id;
+    private String name;
+    private String gender;
+    private Date dateOfBirth;
+
+    public Person(int id, String name, String gender, Date dateOfBirth) {
+        this.id = id;
+        this.name = name;
+        this.gender = gender;
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public Date getDateOfBirth() {
+        return dateOfBirth;
+    }
+}
+
+// Voter class
+class Voter {
+    private static final int MIN_AGE = 18;
+    private List<Person> registeredVoters = new ArrayList<>();
+    private List<Person> invalidVoters = new ArrayList<>();
+
+    public void registerVoter(Person person) throws InvalidVoterException {
+        if (getAge(person) < MIN_AGE) {
+            invalidVoters.add(person);
+            throw new InvalidVoterException("Person below 18 cannot be registered as a voter.");
+        } else {
+            registeredVoters.add(person);
+        }
+    }
+
+    // Calculate age based on the date of birth
+    private int getAge(Person person) {
+        Date today = new Date();
+        int age = today.getYear() - person.getDateOfBirth().getYear();
+        if (today.getMonth() < person.getDateOfBirth().getMonth() || 
+            (today.getMonth() == person.getDateOfBirth().getMonth() && today.getDate() < person.getDateOfBirth().getDate())) {
+            age--;
+        }
+        return age;
+    }
+
+    // List all registered voters
+    public void listRegisteredVoters() {
+        System.out.println("Registered Voters:");
+        for (Person person : registeredVoters) {
+            System.out.println(person.getName());
+        }
+    }
+
+    // List all invalid voters
+    public void listInvalidVoters() {
+        System.out.println("Invalid Voters (Below 18):");
+        for (Person person : invalidVoters) {
+            System.out.println(person.getName());
+        }
+    }
+}
+
+// InvalidVoterException class
+class InvalidVoterException extends Exception {
+    public InvalidVoterException(String message) {
+        super(message);
+    }
+}
+
+// Main class
+public class VoterRegistrationSystem {
+    public static void main(String[] args) {
+        // Create sample person objects
+        List<Person> persons = new ArrayList<>();
+        persons.add(new Person(1, "Alice", "Female", new Date(2005, 5, 20))); // Below 18
+        persons.add(new Person(2, "Bob", "Male", new Date(2000, 10, 15))); // Above 18
+        persons.add(new Person(3, "Charlie", "Male", new Date(1998, 7, 25))); // Above 18
+        persons.add(new Person(4, "Diana", "Female", new Date(2010, 3, 10))); // Below 18
+
+        // Create Voter instance
+        Voter voter = new Voter();
+
+        // Register voters
+        for (Person person : persons) {
+            try {
+                voter.registerVoter(person);
+            } catch (InvalidVoterException e) {
+                System.out.println(e.getMessage() + " Name: " + person.getName());
+            }
+        }
+
+        // List all registered voters
+        voter.listRegisteredVoters();
+
+        // List all invalid voters
+        voter.listInvalidVoters();
+    }
+}
+
+
+
+Sample Output:
+
+Person below 18 cannot be registered as a voter. Name: Alice
+Person below 18 cannot be registered as a voter. Name: Diana
+Registered Voters:
+Bob
+Charlie
+Invalid Voters (Below 18):
+Alice
+Diana

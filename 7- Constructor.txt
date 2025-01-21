@@ -1,0 +1,66 @@
+Q#1
+A. Create a base class named "Person" with attributes like name and age. The class must have a proper constructor.
+B. Create a subclass named "Employee" by inheriting the "Person" class. Add these attributes: employeeId and salary.
+C. Demonstrate using the super keyword to call the superclass constructor from the subclass constructor.
+
+
+// Base class Person
+class Person {
+    String name;
+    int age;
+
+    // Constructor for Person class
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    // Method to display Person details
+    public void displayPersonDetails() {
+        System.out.println("Name: " + name);
+        System.out.println("Age: " + age);
+    }
+}
+
+// Subclass Employee inheriting from Person
+class Employee extends Person {
+    int employeeId;
+    double salary;
+
+    // Constructor for Employee class
+    public Employee(String name, int age, int employeeId, double salary) {
+        super(name, age); // Calling the superclass constructor
+        this.employeeId = employeeId;
+        this.salary = salary;
+    }
+
+    // Method to display Employee details
+    public void displayEmployeeDetails() {
+        // Displaying Person details
+        super.displayPersonDetails();
+        // Displaying Employee-specific details
+        System.out.println("Employee ID: " + employeeId);
+        System.out.println("Salary: " + salary);
+    }
+}
+
+// Main class to demonstrate the functionality
+public class InheritanceDemo {
+    public static void main(String[] args) {
+        // Creating an Employee object
+        Employee emp = new Employee("John Doe", 30, 101, 75000.50);
+
+        // Displaying Employee details
+        emp.displayEmployeeDetails();
+    }
+}
+
+
+
+
+
+Output :
+Name: John Doe
+Age: 30
+Employee ID: 101
+Salary: 75000.5
